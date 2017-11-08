@@ -1,0 +1,28 @@
+{
+  "name": "safe-code-point",
+  "version": "0.0.4",
+  "description": "Ascertains whether a Unicode code point is 'safe' for the purposes of encoding binary data",
+  "main": "index.js",
+  "keywords": [
+    "base64",
+    "base65536",
+    "base32768",
+    "base2048",
+    "base131072",
+    "encoding",
+    "unicode",
+    "text",
+    "decoding",
+    "binary"
+  ],
+  "scripts": {
+    "jasmine": "jasmine",
+    "standard": "standard",
+    "test": "npm run jasmine -- test.js"
+  },
+  "author": "qntm",
+  "devDependencies": {
+    "jasmine": "^2.8.0",
+    "standard": "^10.0.3"
+  }
+}
