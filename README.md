@@ -2,7 +2,7 @@
 
 Module for determining whether the supplied code point is ["safe"](https://qntm.org/safe). This module (well, code very much like it) was used to generate code points for [Base65536](https://github.com/qntm/base65536), [Base32768](https://github.com/qntm/base32768) and [Base2048](https://github.com/qntm/base2048).
 
-## Usage
+## Example
 
 ```js
 'use strict'
@@ -30,7 +30,7 @@ Returns a Boolean indicating whether the supplied code point is safe (is not a m
 
 ### safeCodePoint.generalCategory(codepoint[, version = '10.0'])
 
-Returns the Unicode General Category of the supplied code point as a two-character string, e.g. "Lo" for "Letter, other".
+Returns the Unicode General Category of the supplied code point as a two-character string, e.g. `"Lo"` for "Letter, other".
 
 ## Licence
 
