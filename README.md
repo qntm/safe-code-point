@@ -26,7 +26,7 @@ versions.forEach(version => {
 
 ### safeCodePoint(codePoint[, version = '10.0'])
 
-Returns a Boolean indicating whether the supplied code point is safe (is not a member of any unsafe Unicode General Categories, has a canonical combining class of 0 and survives all forms of normalization). `codePoint` should be an integer from `1` to `1114111` inclusive. `version` should be a string giving the Unicode version number: values supported are `'8.0'`, `'9.0'` and `'10.0'`.
+Returns a Boolean indicating whether the supplied code point is safe (is not a member of any unsafe Unicode General Categories, has a canonical combining class of 0 and survives all forms of normalization). `codePoint` should be an integer from `0` to `1114111` inclusive. `version` should be a string giving the Unicode version number: values supported are `'8.0'`, `'9.0'` and `'10.0'`.
 
 ### safeCodePoint.generalCategory(codepoint[, version = '10.0'])
 
