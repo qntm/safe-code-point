@@ -4,6 +4,7 @@
 
 const canonicalCombiningClass = require('./lib/canonical-combining-class.js')
 const dehex = require('./lib/dehex.js')
+const eastAsianWidth = require('./lib/east-asian-width.js')
 const generalCategory = require('./lib/general-category.js')
 const normalizationProperties = require('./lib/normalization-properties.js')
 const safeCodePoint = require('./index.js')
@@ -21,6 +22,18 @@ describe('dehex', () => {
     expect(dehex('0000')).toEqual([0])
     expect(dehex('0000..0002')).toEqual([0, 1, 2])
     expect(dehex('000A..000C')).toEqual([10, 11, 12])
+  })
+})
+
+describe('eastAsianWidth', () => {
+  it('works', () => {
+    expect(eastAsianWidth(0, '8.0')).toBe('N')
+    expect(eastAsianWidth(0x001F, '8.0')).toBe('N')
+    expect(eastAsianWidth(0x0020, '8.0')).toBe('Na')
+    expect(eastAsianWidth(0x00F8, '9.0')).toBe('A')
+    expect(() => eastAsianWidth(0xABFF, '9.0')).toThrow()
+    expect(() => eastAsianWidth(0xE1000, '10.0')).toThrow()
+    expect(eastAsianWidth(0x30000, '10.0')).toBe('W')
   })
 })
 
@@ -94,6 +107,21 @@ describe('base65536', () => {
       '𦘀𦜀𦠀𦤀𦨀𦬀𦰀𦴀𦸀𦼀𧀀𧄀𧈀𧌀𧐀𧔀' +
       '𧘀𧜀𧠀𧤀𧨀𧬀𧰀𧴀𧸀𧼀𨀀𨄀𨈀𨌀𨐀𨔀'
     )
+
+    // Check East_Asian_Width properties. Each block of 256 characters
+    // has the same East_Asian_Width property. 243 of the blocks are 'W' (wide),
+    // the other 13 + 1 are 'N' (neutral, which in effect is narrow).
+    // This is significant when considering rendering and wrapping.
+    const allBlockStarts = [...blockStarts].map(x => x.codePointAt(0))
+    const neutralBlockStarts = [...'ᔀꔀ𐘀𒀀𒄀𒈀𓀀𓄀𓈀𓌀𔐀𔔀𖠀𖤀'].map(x => x.codePointAt(0))
+    allBlockStarts.forEach(blockStart => {
+      for (let i = 0; i < 1 << 8; i++) {
+        const codePoint = blockStart + i
+        const isInNeutralBlock = neutralBlockStarts
+          .some(neutralBlockStart => neutralBlockStart <= codePoint && codePoint < neutralBlockStart + (1 << 8))
+        expect(eastAsianWidth(codePoint, '8.0')).toBe(isInNeutralBlock ? 'N' : 'W')
+      }
+    })
   })
 })
 

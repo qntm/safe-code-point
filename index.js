@@ -5,6 +5,7 @@
 */
 
 const canonicalCombiningClass = require('./lib/canonical-combining-class.js')
+const eastAsianWidth = require('./lib/east-asian-width.js')
 const generalCategory = require('./lib/general-category.js')
 const normalizationProperties = require('./lib/normalization-properties.js')
 
@@ -60,3 +61,4 @@ module.exports = function (codePoint, version = '10.0') {
 }
 
 module.exports.generalCategory = generalCategory
+module.exports.eastAsianWidth = eastAsianWidth
