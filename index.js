@@ -8,6 +8,7 @@ const canonicalCombiningClass = require('./lib/canonical-combining-class.js')
 const eastAsianWidth = require('./lib/east-asian-width.js')
 const generalCategory = require('./lib/general-category.js')
 const normalizationProperties = require('./lib/normalization-properties.js')
+const supportedVersions = require('./lib/supported-versions.js')
 
 const quickChecks = [
   'NFD_QC', // canonical decomposition
@@ -50,7 +51,7 @@ const gcIsSafe = {
   So: true   // Symbol, Other
 }
 
-module.exports = function (codePoint, version = '10.0') {
+module.exports = function (codePoint, version = supportedVersions[supportedVersions.length - 1]) {
   const passesQuickChecks = quickChecks.every(property =>
     normalizationProperties(codePoint, property, version) === 'Y'
   )
@@ -60,5 +61,6 @@ module.exports = function (codePoint, version = '10.0') {
   return passesQuickChecks && inSafeGc && hasCcc0
 }
 
+module.exports.supportedVersions = supportedVersions
 module.exports.generalCategory = generalCategory
 module.exports.eastAsianWidth = eastAsianWidth

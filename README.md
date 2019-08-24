@@ -10,8 +10,8 @@ Module for determining whether the supplied code point is ["safe"](https://qntm.
 const safeCodePoint = require('./index.js')
 
 const numCodePoints = (1 << 16) + (1 << 20)
-const versions = ['8.0', '9.0', '10.0']
-versions.forEach(version => {
+
+safeCodePoint.supportedVersions.forEach(version => {
   let safe = 0
   for (let codePoint = 0; codePoint < numCodePoints; codePoint++) {
     if (safeCodePoint(codePoint, version)) {
@@ -24,11 +24,15 @@ versions.forEach(version => {
 
 ## API
 
-### safeCodePoint(codePoint[, version = '10.0'])
+### safeCodePoint(codePoint[, version = '12.0'])
 
-Returns a Boolean indicating whether the supplied code point is safe (is not a member of any unsafe Unicode General Categories, has a canonical combining class of 0 and survives all forms of normalization). `codePoint` should be an integer from `0` to `1114111` inclusive. `version` should be a string giving the Unicode version number: values supported are `'8.0'`, `'9.0'` and `'10.0'`.
+Returns a Boolean indicating whether the supplied code point is safe (is not a member of any unsafe Unicode General Categories, has a canonical combining class of 0 and survives all forms of normalization). `codePoint` should be an integer from `0` to `1114111` inclusive. `version` should be a string from `supportedVersions`.
 
-### safeCodePoint.generalCategory(codepoint[, version = '10.0'])
+### safeCodePoint.supportedVersions
+
+An array of version strings. At the time of writing, the values supported are `'7.0'`, `'8.0'`, `'9.0'`, `'10.0'`, `'11.0'` and `'12.0'`.
+
+### safeCodePoint.generalCategory(codepoint[, version = '12.0'])
 
 Returns the Unicode General Category of the supplied code point as a two-character string, e.g. `"Lo"` for "Letter, other".
 

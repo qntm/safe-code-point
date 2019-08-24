@@ -1,6 +1,6 @@
 {
   "name": "safe-code-point",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Ascertains whether a Unicode code point is 'safe' for the purposes of encoding binary data",
   "main": "index.js",
   "keywords": [
