@@ -19,17 +19,17 @@ const quickChecks = [
 
 // General Categories CONSIDERED SAFE
 const gcIsSafe = {
-  Ll: true,  // Letter, Lowercase
-  Lm: true,  // Letter, Modifier
-  Lo: true,  // Letter, Other
-  Lt: true,  // Letter, Titlecase
-  Lu: true,  // Letter, Uppercase
+  Ll: true, // Letter, Lowercase
+  Lm: true, // Letter, Modifier
+  Lo: true, // Letter, Other
+  Lt: true, // Letter, Titlecase
+  Lu: true, // Letter, Uppercase
   Me: false, // Mark, Enclosing
   Mn: false, // Mark, Nonspacing
   Mc: false, // Mark, Spacing Combining
-  Nd: true,  // Number, Decimal Digit
-  Nl: true,  // Number, Letter
-  No: true,  // Number, Other
+  Nd: true, // Number, Decimal Digit
+  Nl: true, // Number, Letter
+  No: true, // Number, Other
   Cc: false, // Other, Control
   Cf: false, // Other, Format
   Cn: false, // Other, Not Assigned (no characters in the file have this property)
@@ -45,10 +45,10 @@ const gcIsSafe = {
   Zl: false, // Separator, Line
   Zp: false, // Separator, Paragraph
   Zs: false, // Separator, Space
-  Sc: true,  // Symbol, Currency
-  Sm: true,  // Symbol, Math
-  Sk: true,  // Symbol, Modifier
-  So: true   // Symbol, Other
+  Sc: true, // Symbol, Currency
+  Sm: true, // Symbol, Math
+  Sk: true, // Symbol, Modifier
+  So: true // Symbol, Other
 }
 
 module.exports = function (codePoint, version = supportedVersions[supportedVersions.length - 1]) {

@@ -60,7 +60,7 @@ describe('safeCodePoint', () => {
     expect(safeCodePoint(36)).toBe(true)
     expect(safeCodePoint(65)).toBe(true)
   })
-  
+
   it('README example', () => {
     const safeCodePoints = {}
     const numCodePoints = (1 << 16) + (1 << 20)
@@ -98,7 +98,7 @@ describe('base65536', () => {
     }
 
     const getAllSafeRanges = (rangeSize, version) => {
-      let allSafeRanges = []
+      const allSafeRanges = []
       for (let codePoint = 0; codePoint < (1 << 16) + (1 << 20); codePoint += rangeSize) {
         if (safeRange(codePoint, codePoint + rangeSize, version)) {
           allSafeRanges.push(codePoint)
@@ -161,7 +161,7 @@ describe('base32768', () => {
     }
 
     const getAllSafeRanges = (rangeSize, version) => {
-      let allSafeRanges = []
+      const allSafeRanges = []
       for (let codePoint = 0; codePoint < (1 << 16) + (1 << 20); codePoint += rangeSize) {
         if (safeRange(codePoint, codePoint + rangeSize, version)) {
           allSafeRanges.push(codePoint)
@@ -229,61 +229,59 @@ describe('base2048', () => {
 })
 
 describe('base2e15', () => {
-	it('is not safe', () => {
-		const repertoires = [
-			[0x3480, 0x4DB6],
-			[0x4E00, 0x8926],
-			[0xAC00, 0xD7A4],
-			[0x3400, 0x3480]
-		]
-		const badGc = []
-		const badCcc = []
-		const badNfdQc = []
-		const badNfkdQc = []
-		const unsafe = []
-		repertoires.forEach(repertoire => {
-			for (let i = repertoire[0]; i < repertoire[1]; i++) {
-				if (safeCodePoint.generalCategory(i, '10.0') !== 'Lo') {
-					badGc.push(i)
-				}
-				if (canonicalCombiningClass(i, '10.0') !== 0) {
-					badCcc.push(i)
-				}
-				if (normalizationProperties(i, 'NFD_QC', '10.0') !== 'Y') {
-					badNfdQc.push(i)
-				}
-				if (normalizationProperties(i, 'NFKD_QC', '10.0') !== 'Y') {
-					badNfkdQc.push(i)
-				}
-			}
-		})
-		expect(badGc).toEqual([])
-		expect(badCcc).toEqual([])
-		expect(badNfdQc.length).toBe(11172)
-		expect(badNfkdQc.length).toBe(11172)
-	})
+  it('is not safe', () => {
+    const repertoires = [
+      [0x3480, 0x4DB6],
+      [0x4E00, 0x8926],
+      [0xAC00, 0xD7A4],
+      [0x3400, 0x3480]
+    ]
+    const badGc = []
+    const badCcc = []
+    const badNfdQc = []
+    const badNfkdQc = []
+    repertoires.forEach(repertoire => {
+      for (let i = repertoire[0]; i < repertoire[1]; i++) {
+        if (safeCodePoint.generalCategory(i, '10.0') !== 'Lo') {
+          badGc.push(i)
+        }
+        if (canonicalCombiningClass(i, '10.0') !== 0) {
+          badCcc.push(i)
+        }
+        if (normalizationProperties(i, 'NFD_QC', '10.0') !== 'Y') {
+          badNfdQc.push(i)
+        }
+        if (normalizationProperties(i, 'NFKD_QC', '10.0') !== 'Y') {
+          badNfkdQc.push(i)
+        }
+      }
+    })
+    expect(badGc).toEqual([])
+    expect(badCcc).toEqual([])
+    expect(badNfdQc.length).toBe(11172)
+    expect(badNfkdQc.length).toBe(11172)
+  })
 })
 
 describe('base32k', () => {
-	it('is not safe', () => {
-		const lanes = [
-			[0x4000, 0xA000],
-			[0xB000, 0xD000]
-		]
-		const badNfdQc = []
-		const badNfkdQc = []
-		const unsafe = []
-		lanes.forEach(lane => {
-			for (let i = lane[0]; i < lane[1]; i++) {
-				if (normalizationProperties(i, 'NFD_QC', '10.0') !== 'Y') {
-					badNfdQc.push(i)
-				}
-				if (normalizationProperties(i, 'NFKD_QC', '10.0') !== 'Y') {
-					badNfkdQc.push(i)
-				}
-			}
-		})
-		expect(badNfdQc.length).toBe(8192)
-		expect(badNfkdQc.length).toBe(8192)
-	})
+  it('is not safe', () => {
+    const lanes = [
+      [0x4000, 0xA000],
+      [0xB000, 0xD000]
+    ]
+    const badNfdQc = []
+    const badNfkdQc = []
+    lanes.forEach(lane => {
+      for (let i = lane[0]; i < lane[1]; i++) {
+        if (normalizationProperties(i, 'NFD_QC', '10.0') !== 'Y') {
+          badNfdQc.push(i)
+        }
+        if (normalizationProperties(i, 'NFKD_QC', '10.0') !== 'Y') {
+          badNfkdQc.push(i)
+        }
+      }
+    })
+    expect(badNfdQc.length).toBe(8192)
+    expect(badNfkdQc.length).toBe(8192)
+  })
 })

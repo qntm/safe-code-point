@@ -18,11 +18,11 @@
   "scripts": {
     "jasmine": "jasmine",
     "standard": "standard",
-    "test": "npm run jasmine -- test.js"
+    "test": "npm run standard && npm run jasmine -- test.js"
   },
   "author": "qntm",
   "devDependencies": {
     "jasmine": "^2.8.0",
-    "standard": "^10.0.3"
+    "standard": "^14.0.0"
   }
 }
