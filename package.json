@@ -27,7 +27,7 @@
   },
   "author": "qntm",
   "devDependencies": {
-    "jasmine": "^2.8.0",
+    "jasmine": "^3.6.1",
     "standard": "^14.0.0"
   }
 }
