@@ -5,8 +5,6 @@ Module for determining whether the supplied code point is ["safe"](https://qntm.
 ## Example
 
 ```js
-'use strict'
-
 const safeCodePoint = require('./index.js')
 
 const numCodePoints = (1 << 16) + (1 << 20)
