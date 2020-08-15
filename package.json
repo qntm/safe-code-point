@@ -1,6 +1,6 @@
 {
   "name": "safe-code-point",
-  "version": "0.0.5",
+  "version": "1.0.0",
   "description": "Ascertains whether a Unicode code point is 'safe' for the purposes of encoding binary data",
   "homepage": "https://github.com/qntm/safe-code-point",
   "repository": {
