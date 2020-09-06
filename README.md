@@ -7,35 +7,35 @@ Module for determining whether the supplied code point is ["safe"](https://qntm.
 ```js
 'use strict'
 
-const safeCodePoint = require('./index.js')
+const SafeCodePoint = require('safe-code-point')
 
-const numCodePoints = (1 << 16) + (1 << 20)
+SafeCodePoint('12.0').then(safeCodePoint => {
+  const numCodePoints = (1 << 16) + (1 << 20)
 
-safeCodePoint.supportedVersions.forEach(version => {
-  let safe = 0
+  let numSafeCodePoints = 0
   for (let codePoint = 0; codePoint < numCodePoints; codePoint++) {
-    if (safeCodePoint(codePoint, version)) {
-      safe++
+    if (safeCodePoint(codePoint)) {
+      numSafeCodePoints++
     }
   }
-  console.log(version, safe)
+
+  console.log(numSafeCodePoints)
 })
 ```
 
 ## API
 
-### safeCodePoint(codePoint[, version = '12.0'])
+### SafeCodePoint(version)
 
-Returns a Boolean indicating whether the supplied code point is safe (is not a member of any unsafe Unicode General Categories, has a canonical combining class of 0 and survives all forms of normalization). `codePoint` should be an integer from `0` to `1114111` inclusive. `version` should be a string from `supportedVersions`.
+Returns a promise which resolves to a `safeCodePoint` function for the supplied version of Unicode.
 
-### safeCodePoint.supportedVersions
+Data is fetched from [the Unicode website](http://www.unicode.org/Public) at run time. Supported version strings are those seen there, *e.g.* `'5.2.0'`, `'13.0.0'`.
 
-An array of version strings. At the time of writing, the values supported are `'7.0'`, `'8.0'`, `'9.0'`, `'10.0'`, `'11.0'` and `'12.0'`.
+### safeCodePoint(codePoint)
 
-### safeCodePoint.generalCategory(codepoint[, version = '12.0'])
+Returns a Boolean indicating whether the supplied code point is safe (is not a member of any unsafe Unicode General Categories, has a canonical combining class of 0 and survives all forms of normalization). `codePoint` should be an integer from `0` to `1114111` inclusive.
+
+### safeCodePoint.generalCategory(codepoint)
 
 Returns the Unicode General Category of the supplied code point as a two-character string, e.g. `"Lo"` for "Letter, other".
 
-## Licence
-
-This code is MIT-licenced, however the bundled UCD files are subject to [separate terms of use](http://www.unicode.org/copyright.html).

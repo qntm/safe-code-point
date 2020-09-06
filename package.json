@@ -1,13 +1,13 @@
 {
   "name": "safe-code-point",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Ascertains whether a Unicode code point is 'safe' for the purposes of encoding binary data",
   "homepage": "https://github.com/qntm/safe-code-point",
   "repository": {
     "type": "git",
     "url": "git://github.com/qntm/safe-code-point.git"
   },
-  "main": "index.js",
+  "main": "lib",
   "keywords": [
     "base64",
     "base65536",
@@ -22,12 +22,20 @@
   ],
   "scripts": {
     "jasmine": "jasmine",
-    "standard": "standard",
-    "test": "npm run standard && npm run jasmine -- test.js"
+    "standard": "standard --fix",
+    "test": "standard && jasmine \"**/*.spec.js\""
   },
   "author": "qntm",
+  "dependencies": {
+    "node-fetch": "^2.6.1"
+  },
   "devDependencies": {
     "jasmine": "^3.6.1",
     "standard": "^14.0.0"
-  }
+  },
+  "files": [
+    "lib",
+    "!lib/**/*.spec.js"
+  ],
+  "license": "MIT"
 }
