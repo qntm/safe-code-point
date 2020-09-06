@@ -29,5 +29,9 @@
   "devDependencies": {
     "jasmine": "^2.8.0",
     "standard": "^14.0.0"
-  }
+  },
+  "files": [
+    "lib",
+    "!lib/**/*.spec.js"
+  ]
 }
