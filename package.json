@@ -26,6 +26,9 @@
     "test": "standard && jasmine \"**/*.spec.js\""
   },
   "author": "qntm",
+  "dependencies": {
+    "node-fetch": "^2.6.1"
+  },
   "devDependencies": {
     "jasmine": "^2.8.0",
     "standard": "^14.0.0"
@@ -33,5 +36,6 @@
   "files": [
     "lib",
     "!lib/**/*.spec.js"
-  ]
+  ],
+  "license": "MIT"
 }

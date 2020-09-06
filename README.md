@@ -8,25 +8,28 @@ Module for determining whether the supplied code point is ["safe"](https://qntm.
 'use strict'
 
 const SafeCodePoint = require('safe-code-point')
-const safeCodePoint = SafeCodePoint('12.0')
 
-const numCodePoints = (1 << 16) + (1 << 20)
+SafeCodePoint('12.0').then(safeCodePoint => {
+  const numCodePoints = (1 << 16) + (1 << 20)
 
-let numSafeCodePoints = 0
-for (let codePoint = 0; codePoint < numCodePoints; codePoint++) {
-  if (safeCodePoint(codePoint)) {
-    numSafeCodePoints++
+  let numSafeCodePoints = 0
+  for (let codePoint = 0; codePoint < numCodePoints; codePoint++) {
+    if (safeCodePoint(codePoint)) {
+      numSafeCodePoints++
+    }
   }
-}
 
-console.log(numSafeCodePoints)
+  console.log(numSafeCodePoints)
+})
 ```
 
 ## API
 
 ### SafeCodePoint(version)
 
-Returns a `safeCodePoint` function for the supplied version of Unicode. At the time of writing, the `version`s supported are `'7.0'`, `'8.0'`, `'9.0'`, `'10.0'`, `'11.0'` and `'12.0'`.
+Returns a promise which resolves to a `safeCodePoint` function for the supplied version of Unicode.
+
+Data is fetched from [the Unicode website](http://www.unicode.org/Public) at run time. Supported version strings are those seen there, *e.g.* `'5.2.0'`, `'13.0.0'`.
 
 ### safeCodePoint(codePoint)
 
@@ -36,6 +39,3 @@ Returns a Boolean indicating whether the supplied code point is safe (is not a m
 
 Returns the Unicode General Category of the supplied code point as a two-character string, e.g. `"Lo"` for "Letter, other".
 
-## Licence
-
-This code is MIT-licenced, however the bundled UCD files are subject to [separate terms of use](http://www.unicode.org/copyright.html).
