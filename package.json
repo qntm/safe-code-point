@@ -7,7 +7,7 @@
     "type": "git",
     "url": "git://github.com/qntm/safe-code-point.git"
   },
-  "main": "index.js",
+  "main": "lib",
   "keywords": [
     "base64",
     "base65536",
