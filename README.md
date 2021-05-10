@@ -9,7 +9,7 @@ Module for determining whether the supplied code point is ["safe"](https://qntm.
 
 const SafeCodePoint = require('safe-code-point')
 
-SafeCodePoint('12.0').then(safeCodePoint => {
+SafeCodePoint('12.0.0').then(safeCodePoint => {
   const numCodePoints = (1 << 16) + (1 << 20)
 
   let numSafeCodePoints = 0
@@ -29,7 +29,7 @@ SafeCodePoint('12.0').then(safeCodePoint => {
 
 Returns a promise which resolves to a `safeCodePoint` function for the supplied version of Unicode.
 
-Data is fetched from [the Unicode website](http://www.unicode.org/Public) at run time. Supported version strings are those seen there, *e.g.* `'5.2.0'`, `'13.0.0'`.
+Data is fetched from [the Unicode website](http://www.unicode.org/Public) at run time. At the time of writing, supported version strings are a subset of those seen in that directory: `'4.1.0'` to `'13.0.0'`. (Earlier versions do not provide the data in the same consumable structure, and Unicode 14.0.0 is a work in progress.)
 
 ### safeCodePoint(codePoint)
 
