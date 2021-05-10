@@ -37,5 +37,8 @@ Returns a Boolean indicating whether the supplied code point is safe (is not a m
 
 ### safeCodePoint.generalCategory(codepoint)
 
-Returns the Unicode General Category of the supplied code point as a two-character string, e.g. `"Lo"` for "Letter, other".
+Returns the Unicode General Category of the supplied code point as a two-character string, *e.g.* `"Lo"` for "Letter, other".
 
+### safeCodePoint.wordBreak(codepoint)
+
+Returns the [Word_Break property](https://unicode.org/reports/tr29/#Table_Word_Break_Property_Values) value of the supplied code point, *e.g.* `'Numeric'`, `'ALetter'` or (in most cases) `undefined`.

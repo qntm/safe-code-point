@@ -22,6 +22,7 @@
   ],
   "scripts": {
     "jasmine": "jasmine",
+    "postpublish": "npm version patch && git push",
     "standard": "standard --fix",
     "test": "standard && jasmine \"**/*.spec.js\""
   },
