@@ -1,26 +1,25 @@
 # safe-code-point
 
-Module for determining whether the supplied code point is ["safe"](https://qntm.org/safe). This module (well, code very much like it) was used to generate code points for [Base65536](https://github.com/qntm/base65536), [Base32768](https://github.com/qntm/base32768) and [Base2048](https://github.com/qntm/base2048).
+Package for determining whether the supplied code point is ["safe"](https://qntm.org/safe). This module (well, code very much like it) was used to generate code points for [Base65536](https://github.com/qntm/base65536), [Base32768](https://github.com/qntm/base32768) and [Base2048](https://github.com/qntm/base2048).
+
+This package supports ES modules only.
 
 ## Example
 
 ```js
-'use strict'
+import SafeCodePoint from 'safe-code-point'
 
-const SafeCodePoint = require('safe-code-point')
+const safeCodePoint = await SafeCodePoint('12.0.0')
+const numCodePoints = (1 << 16) + (1 << 20)
 
-SafeCodePoint('12.0.0').then(safeCodePoint => {
-  const numCodePoints = (1 << 16) + (1 << 20)
-
-  let numSafeCodePoints = 0
-  for (let codePoint = 0; codePoint < numCodePoints; codePoint++) {
-    if (safeCodePoint(codePoint)) {
-      numSafeCodePoints++
-    }
+let numSafeCodePoints = 0
+for (let codePoint = 0; codePoint < numCodePoints; codePoint++) {
+  if (safeCodePoint(codePoint)) {
+    numSafeCodePoints++
   }
+}
 
-  console.log(numSafeCodePoints)
-})
+console.log(numSafeCodePoints)
 ```
 
 ## API
