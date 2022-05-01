@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "jasmine": "^4.0.2",
-    "standard": "^16.0.4"
+    "standard": "^17.0.0"
   },
   "files": [
     "lib",
