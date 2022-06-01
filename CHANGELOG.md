@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 3.x.x
+
+`safe-code-point` now uses ES modules, not CommonJS modules.
+
 ## 2.x.x
 
 The API of `safe-code-point` has completely changed to asynchronously look up Unicode code point data. Code like:
