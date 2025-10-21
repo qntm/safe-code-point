@@ -9,7 +9,7 @@ This package supports ES modules only.
 ```js
 import SafeCodePoint from 'safe-code-point'
 
-const safeCodePoint = await SafeCodePoint('12.0.0')
+const safeCodePoint = await SafeCodePoint('17.0.0')
 const numCodePoints = (1 << 16) + (1 << 20)
 
 let numSafeCodePoints = 0
@@ -24,11 +24,58 @@ console.log(numSafeCodePoints)
 
 ## API
 
-### SafeCodePoint(version)
+### SafeCodePoint(version, options)
 
 Returns a promise which resolves to a `safeCodePoint` function for the supplied version of Unicode.
 
-Data is fetched from [the Unicode website](http://www.unicode.org/Public) at run time. At the time of writing, supported version strings are a subset of those seen in that directory: `'4.1.0'` to `'13.0.0'`. (Earlier versions do not provide the data in the same consumable structure, and Unicode 14.0.0 is a work in progress.)
+Data is fetched from [the Unicode website](http://www.unicode.org/Public) at run time. At the time of writing, supported version strings are a subset of those seen in that directory: `'4.1.0'` to `'17.0.0'`. (Earlier versions do not provide the data in the same consumable structure.)
+
+#### options
+
+An optional object with the keys acting as additional options. The options are as follows:
+- **`disallowed`**: An iterable (such as an Array) that contains a list of specific codepoints as numbers that are explicitly considered to be unsafe regardless of other options.
+- **`safeCategories`**: An object that determines whether a codepoint category is safe or not. The keys are the category, and the value is `true` if it is safe, and `false` or `undefined` if it is not safe. If not passed, the default parameters are shown in the example below.
+
+Example:
+```js
+const safeCodePoint = await SafeCodePoint('17.0.0', {
+  safeCategories: {
+    Ll: true, // Letter, Lowercase
+    Lm: true, // Letter, Modifier
+    Lo: true, // Letter, Other
+    Lt: true, // Letter, Titlecase
+    Lu: true, // Letter, Uppercase
+    Me: false, // Mark, Enclosing
+    Mn: false, // Mark, Nonspacing
+    Mc: false, // Mark, Spacing Combining
+    Nd: true, // Number, Decimal Digit
+    Nl: true, // Number, Letter
+    No: true, // Number, Other
+    Cc: false, // Other, Control
+    Cf: false, // Other, Format
+    Cn: false, // Other, Not Assigned (no characters in the file have this property)
+    Co: false, // Other, Private Use
+    Cs: false, // Other, Surrogate
+    Pe: false, // Punctuation, Close
+    Pc: false, // Punctuation, Connector
+    Pd: false, // Punctuation, Dash
+    Pf: false, // Punctuation, Final quote (may behave like Ps or Pe depending on usage)
+    Pi: false, // Punctuation, Initial quote (may behave like Ps or Pe depending on usage)
+    Ps: false, // Punctuation, Open
+    Po: false, // Punctuation, Other
+    Zl: false, // Separator, Line
+    Zp: false, // Separator, Paragraph
+    Zs: false, // Separator, Space
+    Sc: true, // Symbol, Currency
+    Sm: true, // Symbol, Math
+    Sk: true, // Symbol, Modifier
+    So: true // Symbol, Other
+  },
+  disallowed: [
+    0x61, // exclude lowercase a
+  ]
+})
+```
 
 ### safeCodePoint(codePoint)
 
