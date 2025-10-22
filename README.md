@@ -33,8 +33,7 @@ Data is fetched from [the Unicode website](http://www.unicode.org/Public) at run
 #### options
 
 An optional object with the keys acting as additional options. The options are as follows:
-- **`disallowed`**: An iterable (such as an Array) that contains a list of specific codepoints as numbers that are explicitly considered to be unsafe regardless of other options.
-- **`safeCategories`**: An object that determines whether a codepoint category is safe or not. The keys are the category, and the value is `true` if it is safe, and `false` or `undefined` if it is not safe. If not passed, the default parameters are shown in the example below.
+- **`safeCategories`**: An object that determines whether a codepoint category is safe or not. The keys are the category, and the value is `true` if it is safe, and anything else if it is not safe. If not passed, the default parameters are shown in the example below.
 
 Example:
 ```js
@@ -70,10 +69,7 @@ const safeCodePoint = await SafeCodePoint('17.0.0', {
     Sm: true, // Symbol, Math
     Sk: true, // Symbol, Modifier
     So: true // Symbol, Other
-  },
-  disallowed: [
-    0x61, // exclude lowercase a
-  ]
+  }
 })
 ```
 
