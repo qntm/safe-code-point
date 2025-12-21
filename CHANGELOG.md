@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 4.0.0
+
+Support for Node.js 18 and lower is dropped.
+
 ## 3.x.x
 
 `safe-code-point` now uses ES modules, not CommonJS modules.
